@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll the dice</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <style>
+        :root{
+    --color-primary:#301f3d;
+    --color-secundary:#612725;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+body{
+    height: 100vh;
+    background: linear-gradient(
+        var(--color-primary),
+        var(--color-secundary),
+        var(--color-secundary)
+    ) 0 100% no-repeat;
+    background-size: 100% 50%;
+}
+
+.container{
+    width: 400px;
+    padding: 50px;
+    border: 1px solid black;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 15px 35px rgba(50,50,50,0.15);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dice-wrapper{
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+}
+.dice-wrapper img{
+    width: 100px;
+}
+
+p{
+    font-size: 16px;
+    margin: 30px 0;
+    font-weight: 500;
+}
+
+button{
+    background-color: var(--color-primary);
+    border: none;
+    outline: none;
+    color: #ffffff;
+    padding: 15px 0;
+    width: 150px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shake{
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake{
+    0%,100%{
+        transform: rotate(180deg);
+    }
+    50%{
+        transform: rotate(-60deg);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dice-wrapper">
+            <img src="./dice_01.jpg"  id="die-1">
+            <img src="./dice_02.jpg" id="die-2">
+        </div>
+        <p id="total">DEMO TEXT HERE</p>
+        <button onclick="roll()">ROLL THE DICE</button>
+    </div>
+    <script>
+        const lista = ['./dice_01.jpg','./dice_02.jpg','./dice_03.jpg','./dice_04.jpg','./dice_05.jpg','./dice_06.jpg']
+        // ELEMENTOS DOM
+        let img = document.querySelectorAll('img'); //las imagenes
+        let dieOne = document.querySelector('#die-1'); //dado 1
+        let dieTwo = document.querySelector('#die-2');//dado 2
+        
+        function roll(){
+            img.forEach(function(e){
+                e.classList.add('shake');
+            });
+            setTimeout(function(){
+                img.forEach(function(e){
+                e.classList.remove('shake');
+            });
+            },1000)
+            let randomOne = Math.floor(Math.random()*6);
+            let randomTwo = Math.floor(Math.random()*6);
+            dieOne.setAttribute('src', lista[randomOne])
+            dieTwo.setAttribute('src', lista[randomTwo])
+        }
+    </script>
+</body>
+</html>
